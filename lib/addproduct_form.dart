@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:productaddingform/constants.dart';
 import 'package:productaddingform/model/seller_info.dart';
 import 'package:productaddingform/provider/stokeprovider.dart';
 import 'package:productaddingform/variants.dart';
@@ -28,35 +29,40 @@ class _AddProductState extends State<AddProduct> {
               key: _formkey,
               child: Column(
                 children: [
-                 DropdownButtonFormField(
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(
-                      const Radius.circular(30.0),
-                    ),
-                  ),
-                    hintText:"Eg. Lux"),
-                    items: <String>['A', 'B', 'C', 'D'].map((String value) {
-                      return  DropdownMenuItem<String>(
-                        value: value,
-                        child: Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(value),
-                              ElevatedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _detailedForm = true;
-                                    });
-                                  },
-                                  child: Text("Choose"))
-                            ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DropdownButtonFormField(
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(5.0),
+                              
+                            ),
+                            borderSide: BorderSide(color: kcolorash)
                           ),
-                        ),
-                      );
-                    }).toList(),
-                    onChanged: (_) {},
+                          hintText: "Eg. Lux"),
+                      items: <String>['A', 'B', 'C', 'D'].map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(value),
+                                ElevatedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _detailedForm = true;
+                                      });
+                                    },
+                                    child: Text("Choose"))
+                              ],
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (_) {},
+                    ),
                   ),
                   _detailedForm
                       ? Container(
@@ -78,7 +84,8 @@ class _AddProductState extends State<AddProduct> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: TextFormField(
-                                  controller: TextEditingController(text: seller.unitPrice.toString()),
+                                  controller: TextEditingController(
+                                      text: seller.unitPrice.toString()),
                                   decoration: InputDecoration(
                                       labelText: "Unit price",
                                       enabledBorder: OutlineInputBorder(
@@ -96,10 +103,10 @@ class _AddProductState extends State<AddProduct> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: TextFormField(
-                                  controller: TextEditingController(text: seller.unitPrice.toString()),
+                                  controller: TextEditingController(
+                                      text: seller.unitPrice.toString()),
                                   decoration: InputDecoration(
                                       labelText: "Purchase price",
-                                      
                                       enabledBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(5),
@@ -115,7 +122,8 @@ class _AddProductState extends State<AddProduct> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: TextFormField(
-                                  controller: TextEditingController(text: seller.tax.toString()),
+                                  controller: TextEditingController(
+                                      text: seller.tax.toString()),
                                   decoration: InputDecoration(
                                       labelText: "Tax Percent ( % )",
                                       enabledBorder: OutlineInputBorder(
@@ -133,7 +141,8 @@ class _AddProductState extends State<AddProduct> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: TextFormField(
-                                  controller: TextEditingController(text: seller.discount.toString()),
+                                  controller: TextEditingController(
+                                      text: seller.discount.toString()),
                                   decoration: InputDecoration(
                                       labelText: "Discount",
                                       enabledBorder: OutlineInputBorder(
@@ -148,23 +157,34 @@ class _AddProductState extends State<AddProduct> {
                                               color: Colors.black12))),
                                 ),
                               ),
-                              DropdownButton<String>(
-                                value: selectedDiscountType,
-                                //hint: Text("Select Discount"),
-                                onChanged: (value) {
-                                  setState(() {
-                                    selectedDiscountType = value!;
-                                  });
-                                },
-                                items: <String>["Percent", "Flat"]
-                                    .map((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: new Text(
-                                      value,
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: DropdownButtonFormField<String>(
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: const BorderRadius.all(
+                                        const Radius.circular(5.0),
+                                      ),
+                                       borderSide: BorderSide(color: kcolorash)
                                     ),
-                                  );
-                                }).toList(),
+                                  ),
+                                  value: selectedDiscountType,
+                                  //hint: Text("Select Discount"),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedDiscountType = value!;
+                                    });
+                                  },
+                                  items: <String>["Percent", "Flat"]
+                                      .map((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: new Text(
+                                        value,
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
                               ),
                               ElevatedButton(
                                   onPressed: () {
